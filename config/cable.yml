@@ -1,0 +1,15 @@
+default: &default
+  adapter: redis
+  url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
+
+
+development:
+  <<: *default
+  channel_prefix: dcollab_development
+
+test:
+  adapter: test
+
+production:
+  <<: *default
+  channel_prefix: dcollab_production
