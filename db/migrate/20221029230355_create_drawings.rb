@@ -4,7 +4,6 @@ class CreateDrawings < ActiveRecord::Migration[7.0]
       t.string :name
       t.integer :width
       t.integer :height
-      t.jsonb :objects
 
       t.timestamps
     end
