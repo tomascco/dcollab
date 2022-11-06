@@ -1,6 +1,27 @@
+<% content_for :head do %>
+  <%= javascript_import_module_tag "controllers/drawing_canvas_controller" %>
+  <style>
+    div[data-controller="drawing-canvas"] {
+      display: flex;
+      justify-content: center;
+    }
+
+    div[data-controller="drawing-canvas"] canvas {
+        border: solid 2px black;
+    }
+  </style>
+<% end %>
+
 <p style="color: green"><%= notice %></p>
 
 <%= render @drawing %>
+
+<div data-controller="drawing-canvas" data-drawing-canvas-drawing-id-value="<%= @drawing.id %>">
+  <canvas data-drawing-canvas-target="canvas"
+          width="<%= @drawing.width %>"
+          height="<%= @drawing.height %>">
+  </canvas>
+</div>
 
 <div>
   <%= link_to "Edit this drawing", edit_drawing_path(@drawing) %> |
