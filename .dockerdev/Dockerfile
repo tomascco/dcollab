@@ -1,5 +1,5 @@
 ARG RUBY_VERSION
-ARG DISTRO_NAME=bullseye
+ARG DISTRO_NAME=bookworm
 
 FROM ruby:$RUBY_VERSION-slim-$DISTRO_NAME
 
@@ -30,18 +30,6 @@ RUN apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get -yq dist-upgrad
     && rm -rf /var/cache/apt/archives/* \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && truncate -s 0 /var/log/*log
-
-ARG NODE_MAJOR
-RUN curl -sL https://deb.nodesource.com/setup_$NODE_MAJOR.x | bash -
-RUN apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get -yq dist-upgrade && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
-    nodejs \
-    && apt-get clean \
-    && rm -rf /var/cache/apt/archives/* \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-    && truncate -s 0 /var/log/*log
-
-RUN npm install -g yarn
 
 # Application dependencies
 # We use an external Aptfile for this, stay tuned
